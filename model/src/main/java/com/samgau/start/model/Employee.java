@@ -8,8 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Created by Tolegen Izbassar on 29.04.2017.
@@ -18,11 +21,18 @@ import javax.persistence.Table;
 @Table(name = "e_employee")
 @SequenceGenerator(name = "EmployeeGenerator", allocationSize = 1,
         sequenceName = "seq_e_employee", initialValue = 100)
-public class Employee {
+@NamedQueries({
+        @NamedQuery(name = Employee.FindByEmail.NAME, query = Employee.FindByEmail.QUERY)
+})
+public class Employee extends AbstractNamedEntity implements Serializable {
+
+    public final static class FindByEmail {
+        static final String QUERY = "SELECT e FROM Employee e WHERE e.email = :" + EMAIL;
+        public static final String EMAIL = "email";
+        public static final String NAME = "Employee.FindByEmail";
+    }
 
     private Long id;
-
-    private String name;
 
     private String email;
 
@@ -40,17 +50,7 @@ public class Employee {
         this.id = id;
     }
 
-    @Column(nullable = false)
-    @Basic
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(nullable = false)
+    @Column(name = "em", nullable = false, length = 100)
     @Basic
     public String getEmail() {
         return email;
@@ -102,7 +102,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + getName() + '\'' +
                 ", email='" + email + '\'' +
                 ", skype='" + skype + '\'' +
                 '}';
