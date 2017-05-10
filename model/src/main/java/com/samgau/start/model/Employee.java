@@ -27,9 +27,9 @@ import java.io.Serializable;
 public class Employee extends AbstractNamedEntity implements Serializable {
 
     public final static class FindByEmail {
-        static final String QUERY = "SELECT e FROM Employee e WHERE e.email = :" + EMAIL;
         public static final String EMAIL = "email";
         public static final String NAME = "Employee.FindByEmail";
+        static final String QUERY = "SELECT e FROM Employee e WHERE e.email = :" + EMAIL;
     }
 
     private Long id;

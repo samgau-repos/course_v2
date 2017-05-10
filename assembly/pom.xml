@@ -30,7 +30,7 @@
             <groupId>com.samgau.start</groupId>
             <artifactId>model</artifactId>
             <version>${project.version}</version>
-            <type>jar</type>
+            <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>com.samgau.start</groupId>

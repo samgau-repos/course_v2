@@ -5,6 +5,7 @@ import com.samgau.start.repository.api.EmployeeRepositoryLocal;
 import com.samgau.start.repository.api.EmployeeRepositoryRemote;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by Tolegen Izbassar on 03.05.2017.
  */
 @Stateless
+@TransactionAttribute()
 public class EmployeeRepositoryImpl implements EmployeeRepositoryLocal,
         EmployeeRepositoryRemote {
 
