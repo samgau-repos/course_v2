@@ -26,6 +26,11 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-ejb-client</artifactId>
+            <version>4.0.0.Beta26</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -30,7 +30,7 @@
             <groupId>com.samgau.start</groupId>
             <artifactId>model</artifactId>
             <version>${project.version}</version>
-            <type>jar</type>
+            <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>com.samgau.start</groupId>
@@ -47,6 +47,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.0</version>
         </dependency>
     </dependencies>
 
