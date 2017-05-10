@@ -13,5 +13,6 @@
     <artifactId>common</artifactId>
     <version>${project.version}</version>
 
-
+    <dependencies>
+    </dependencies>
 </project>

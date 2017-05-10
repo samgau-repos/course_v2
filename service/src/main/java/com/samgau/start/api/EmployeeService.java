@@ -1,17 +1,21 @@
 package com.samgau.start.api;
 
-import com.samgau.start.model.Employee;
+import com.samgau.start.to.EmployeeDTO;
+
+import java.util.List;
 
 /**
  * Created by Tolegen Izbassar on 06.05.2017.
  */
 public interface EmployeeService {
 
-    Employee findById(Long id);
+    EmployeeDTO findById(Long id);
 
-    Long save(Employee employee);
+    Long save(EmployeeDTO employee);
 
     boolean deleteById(Long id);
 
-    Employee findByEmail(String email);
+    EmployeeDTO findByEmail(String email);
+
+    List<EmployeeDTO> getAll();
 }

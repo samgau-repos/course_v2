@@ -2,12 +2,16 @@ package com.samgau.start.impl;
 
 import com.samgau.start.api.EmployeeServiceLocal;
 import com.samgau.start.api.EmployeeServiceRemote;
+import com.samgau.start.util.TransferUtil;
 import com.samgau.start.model.Employee;
 import com.samgau.start.repository.api.EmployeeRepository;
 import com.samgau.start.repository.api.EmployeeRepositoryRemote;
+import com.samgau.start.to.EmployeeDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tolegen Izbassar on 06.05.2017.
@@ -20,13 +24,14 @@ public class EmployeeServiceImpl implements EmployeeServiceLocal,
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Employee findById(Long id) {
-        return employeeRepository.findById(id);
+    public EmployeeDTO findById(Long id) {
+        Employee employee = employeeRepository.findById(id);
+        return TransferUtil.getEmployeeDTO(employee);
     }
 
     @Override
-    public Long save(Employee employee) {
-        return employeeRepository.save(employee);
+    public Long save(EmployeeDTO employee) {
+        return employeeRepository.save(TransferUtil.getEmployee(employee));
     }
 
     @Override
@@ -35,7 +40,15 @@ public class EmployeeServiceImpl implements EmployeeServiceLocal,
     }
 
     @Override
-    public Employee findByEmail(String email) {
-        return employeeRepository.findByEmail(email);
+    public EmployeeDTO findByEmail(String email) {
+        return TransferUtil.getEmployeeDTO(employeeRepository.findByEmail(email));
+    }
+
+    @Override
+    public List<EmployeeDTO> getAll() {
+        return employeeRepository.findAll()
+                .stream()
+                .map(TransferUtil::getEmployeeDTO)
+                .collect(Collectors.toList());
     }
 }

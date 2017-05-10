@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.io.Serializable;
 
 /**
  * Created by Tolegen Izbassar on 29.04.2017.
@@ -17,7 +18,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "d_department", uniqueConstraints = {
         @UniqueConstraint(name = "name_unique", columnNames = "name")
 })
-public class Department extends AbstractNamedEntity {
+public class Department extends AbstractNamedEntity implements Serializable {
 
     private Long id;
 

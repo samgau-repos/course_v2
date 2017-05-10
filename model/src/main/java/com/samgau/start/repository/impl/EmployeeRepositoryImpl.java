@@ -55,6 +55,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryLocal,
 
     @Override
     public List<Employee> findAll() {
-        return null;
+        return entityManager
+                .createQuery("SELECT emp FROM Employee emp", Employee.class)
+                .getResultList();
     }
 }
