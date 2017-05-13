@@ -1,6 +1,8 @@
 package com.samgau.start.util;
 
+import com.samgau.start.model.Department;
 import com.samgau.start.model.Employee;
+import com.samgau.start.to.DepartmentDTO;
 import com.samgau.start.to.EmployeeDTO;
 
 /**
@@ -31,5 +33,14 @@ public final class TransferUtil {
         employee.setName(employeeDTO.getName());
 
         return employee;
+    }
+
+    public static DepartmentDTO getDepartmentDTO(Department department) {
+        DepartmentDTO departmentDTO = new DepartmentDTO();
+
+        departmentDTO.setId(department.getId());
+        departmentDTO.setName(department.getName());
+
+        return departmentDTO;
     }
 }
