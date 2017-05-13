@@ -7,6 +7,7 @@ import com.samgau.start.to.EmployeeDTO;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
+@SessionScoped
 public class EmployeeController {
 
     private List<EmployeeDTO> employeeDTOList;

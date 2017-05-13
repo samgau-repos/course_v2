@@ -12,5 +12,12 @@
     <artifactId>model</artifactId>
     <version>${project.version}</version>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.samgau.start</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>

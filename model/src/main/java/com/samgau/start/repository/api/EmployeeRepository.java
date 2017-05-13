@@ -1,5 +1,6 @@
 package com.samgau.start.repository.api;
 
+import com.samgau.start.common.exceptions.SystemDatabaseException;
 import com.samgau.start.model.Employee;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface EmployeeRepository {
 
     Long save(Employee employee);
 
-    boolean deleteById(Long id);
+    boolean deleteById(Long id) throws SystemDatabaseException;
 
     Employee findByEmail(String email);
 
