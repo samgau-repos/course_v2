@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition>
+        <p:dialog id="addEmployeeDlg" widgetVar="addEmployeeDlg" closable="true"
+                  closeOnEscape="true"
+                  header="Добавить сотрудника"
+                  appendTo="@(body)">
+            <h:form>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="ФИО сотрудника" for="name"/>
+                    <p:inputText id="name" required="true"
+                                 value="#{employeeController.employee.name}"/>
+
+                    <p:outputLabel value="Почта" for="email"/>
+                    <p:inputText id="email" required="true"
+                                 value="#{employeeController.employee.email}"/>
+
+
+                    <p:outputLabel value="Логин skype" for="skype"/>
+                    <p:inputText id="skype"
+                                 value="#{employeeController.employee.skype}"/>
+
+                    <p:outputLabel value="Департамент" for="dep"/>
+                    <p:selectOneMenu id="dep" value="#{employeeController.employee.departmentId}">
+                        <f:selectItems value="#{employeeController.departments}" var="dep"
+                                       itemLabel="#{dep.name}" itemValue="#{dep.id}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton
+                        actionListener="#{employeeController.addEmployee}"
+                        update="messages"
+                        oncomplete="PF('addEmployeeDlg').hide()"
+                        value="Сохранить"/>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</h:body>
+</html>

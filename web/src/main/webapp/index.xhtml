@@ -6,15 +6,32 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<f:view>
-    <h:form>
-        <p:dataList value="#{employeeController.employeeDTOList}"
-                    var="employeeDTO">
-            <f:facet name="header">
-                Список сотрудников
-            </f:facet>
-            #{employeeDTO.id}, #{employeeDTO.name}
-        </p:dataList>
-    </h:form>
-</f:view>
+<ui:composition template="templates/main_layout.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <p:commandButton value="Добавить сотрудника"
+                             actionListener="#{employeeController.prepareAdd}"
+                             oncomplete="PF('addEmployeeDlg').show()"/>
+            <p:dataTable
+                    id="employeeList"
+                    value="#{employeeController.employeeDTOList}"
+                        var="employeeDTO">
+                <f:facet name="header">
+                    Список сотрудников
+                </f:facet>
+                <p:column headerText="ID">
+                    <p:outputLabel value="#{employeeDTO.id}"/>
+                </p:column>
+                <p:column headerText="email">
+                    <p:outputLabel value="#{employeeDTO.email}"/>
+                </p:column>
+                <p:column headerText="skype">
+                    <p:outputLabel value="#{employeeDTO.skype}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <ui:include src="add_employee.xhtml"/>
+    </ui:define>
+</ui:composition>
 </html>

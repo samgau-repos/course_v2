@@ -10,6 +10,7 @@ import com.samgau.start.to.EmployeeDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,9 +47,11 @@ public class EmployeeServiceImpl implements EmployeeServiceLocal,
 
     @Override
     public List<EmployeeDTO> getAll() {
-        return employeeRepository.findAll()
-                .stream()
-                .map(TransferUtil::getEmployeeDTO)
-                .collect(Collectors.toList());
+        List<EmployeeDTO> list = new ArrayList<>();
+        for (Employee employee : employeeRepository.findAll()) {
+            EmployeeDTO employeeDTO = TransferUtil.getEmployeeDTO(employee);
+            list.add(employeeDTO);
+        }
+        return list;
     }
 }
