@@ -101,10 +101,10 @@ public class Employee extends AbstractNamedEntity implements Serializable {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + getName() + '\'' +
-                ", email='" + email + '\'' +
-                ", skype='" + skype + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", skype='" + getSkype() + '\'' +
                 '}';
     }
 }
