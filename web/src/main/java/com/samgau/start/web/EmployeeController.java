@@ -5,12 +5,13 @@ import com.samgau.start.api.EmployeeServiceRemote;
 import com.samgau.start.impl.DictionariesHolder;
 import com.samgau.start.to.DepartmentDTO;
 import com.samgau.start.to.EmployeeDTO;
+import com.samgau.start.web.utils.JsfUtils;
+import org.primefaces.event.RowEditEvent;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.List;
@@ -20,7 +21,6 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-@SessionScoped
 public class EmployeeController {
 
     private EmployeeDTO employee = new EmployeeDTO();
@@ -50,18 +50,35 @@ public class EmployeeController {
     }
 
     public void addEmployee() {
-        employeeService.save(employee);
-        FacesMessage facesMessage =
-                new FacesMessage("Успешно", "Сотрудник добавлен");
-        FacesContext.getCurrentInstance()
-                .addMessage(null, facesMessage);
+        Long id = employeeService.save(employee);
+        employee.setId(id);
+        employeeDTOList.add(getCopy(employee));
+        JsfUtils.addSuccessMessage("Сотрудник добавлне");
+    }
+
+    public void updateEmployee(RowEditEvent event) {
+        EmployeeDTO employeeDTO = (EmployeeDTO) event.getObject();
+        employeeService.save(employeeDTO);
+        JsfUtils.addSuccessMessage("Сотрудник обновлен");
     }
 
     public List<DepartmentDTO> getDepartments() {
-        return holder.getDepartments();
+        return holder.getDepartmentDTOList();
     }
 
     public void prepareAdd() {
         employee = new EmployeeDTO();
+    }
+
+    private EmployeeDTO getCopy(EmployeeDTO employee) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+
+        employeeDTO.setSkype(employee.getSkype());
+        employeeDTO.setName(employee.getName());
+        employeeDTO.setDepartmentId(employee.getDepartmentId());
+        employeeDTO.setId(employee.getId());
+        employeeDTO.setEmail(employee.getEmail());
+
+        return employeeDTO;
     }
 }

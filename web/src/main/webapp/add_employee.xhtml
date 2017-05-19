@@ -34,9 +34,9 @@
                 </p:panelGrid>
                 <p:commandButton
                         actionListener="#{employeeController.addEmployee}"
-                        update="messages"
+                        update="messages, indexForm:employeeList"
                         oncomplete="PF('addEmployeeDlg').hide()"
-                        value="Сохранить"/>
+                        value="#{messages['common.btns.save']}"/>
             </h:form>
         </p:dialog>
     </ui:composition>

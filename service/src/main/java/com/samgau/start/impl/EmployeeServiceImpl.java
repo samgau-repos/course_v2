@@ -24,6 +24,9 @@ public class EmployeeServiceImpl implements EmployeeServiceLocal,
     @EJB(beanInterface = EmployeeRepositoryRemote.class)
     private EmployeeRepository employeeRepository;
 
+    @EJB
+    private DictionariesHolder dictionariesHolder;
+
     @Override
     public EmployeeDTO findById(Long id) {
         Employee employee = employeeRepository.findById(id);
@@ -31,8 +34,11 @@ public class EmployeeServiceImpl implements EmployeeServiceLocal,
     }
 
     @Override
-    public Long save(EmployeeDTO employee) {
-        return employeeRepository.save(TransferUtil.getEmployee(employee));
+    public Long save(EmployeeDTO employeeDTO) {
+        Employee employee = TransferUtil.getEmployee(employeeDTO);
+        employee.setDepartment(dictionariesHolder
+                .getDepartmentById(employeeDTO.getDepartmentId()));
+        return employeeRepository.save(employee);
     }
 
     @Override

@@ -8,25 +8,68 @@
       xmlns:p="http://primefaces.org/ui">
 <ui:composition template="templates/main_layout.xhtml">
     <ui:define name="content">
-        <h:form>
+        <h:form id="indexForm">
             <p:commandButton value="Добавить сотрудника"
                              actionListener="#{employeeController.prepareAdd}"
                              oncomplete="PF('addEmployeeDlg').show()"/>
             <p:dataTable
+                    editable="true"
                     id="employeeList"
                     value="#{employeeController.employeeDTOList}"
-                        var="employeeDTO">
+                    var="employeeDTO">
                 <f:facet name="header">
                     Список сотрудников
                 </f:facet>
+                <p:ajax event="rowEdit" update="messages"
+                        listener="#{employeeController.updateEmployee}"/>
                 <p:column headerText="ID">
                     <p:outputLabel value="#{employeeDTO.id}"/>
                 </p:column>
+                <p:column headerText="Имя">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{employeeDTO.name}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{employeeDTO.name}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
                 <p:column headerText="email">
-                    <p:outputLabel value="#{employeeDTO.email}"/>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{employeeDTO.email}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{employeeDTO.email}"/>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="skype">
-                    <p:outputLabel value="#{employeeDTO.skype}"/>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{employeeDTO.skype}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{employeeDTO.skype}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Департамент">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <p:outputLabel value="#{employeeDTO.departmentId}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu value="#{employeeDTO.departmentId}">
+                                <f:selectItems value="#{employeeController.departments}" var="dep"
+                                               itemLabel="#{dep.name}" itemValue="#{dep.id}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column width="32px">
+                    <p:rowEditor/>
                 </p:column>
             </p:dataTable>
         </h:form>
