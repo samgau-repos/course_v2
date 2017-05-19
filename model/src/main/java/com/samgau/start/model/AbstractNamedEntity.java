@@ -5,13 +5,14 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Tolegen Izbassar on 03.05.2017.
  */
 @MappedSuperclass
-public abstract class AbstractNamedEntity {
+public abstract class AbstractNamedEntity implements Serializable {
 
     private String name;
     private Date createDate;
