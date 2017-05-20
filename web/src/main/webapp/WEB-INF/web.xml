@@ -18,6 +18,25 @@
         <param-value>true</param-value>
     </context-param>
 
+    <!-- Security -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>pages</web-resource-name>
+            <url-pattern>*.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>USER</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-role>
+        <role-name>USER</role-name>
+    </security-role>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+
     <!-- JSF mapping -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

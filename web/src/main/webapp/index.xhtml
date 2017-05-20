@@ -12,6 +12,9 @@
             <p:commandButton value="Добавить сотрудника"
                              actionListener="#{employeeController.prepareAdd}"
                              oncomplete="PF('addEmployeeDlg').show()"/>
+            <p:commandButton value="Logout"
+                             ajax="false"
+                             action="#{loginBean.logout}"/>
             <p:dataTable
                     editable="true"
                     id="employeeList"

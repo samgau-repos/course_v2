@@ -15,4 +15,10 @@
       <supported-locale>kk</supported-locale>
     </locale-config>
   </application>
+
+  <factory>
+    <exception-handler-factory>
+      com.samgau.start.web.utils.CustomExceptionHandlerFactory
+    </exception-handler-factory>
+  </factory>
 </faces-config>
